@@ -9,8 +9,8 @@ class BabeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Baby Names',
-      home: const MyHomePage(title: 'Baby Name Votes'),
+      title: 'Babe',
+      home: const MyHomePage(title: 'Babe'),
     );
   }
 }
