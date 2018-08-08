@@ -28,14 +28,17 @@ class MyHomePage extends StatelessWidget {
           border: Border.all(color: const Color(0xFF303030)),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        padding: const EdgeInsets.all(8.0),
-        margin: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+        padding: const EdgeInsets.fromLTRB(22.0, 12.0, 22.0, 12.0),
+        margin: const EdgeInsets.only(top: 4.0, bottom: 4.0),
         child: Row(
           children: <Widget>[
             Expanded(
               child: Text(document['name']),
             ),
-            Text(document['votes'].toString())
+            Text(
+              document['votes'].toString(),
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
