@@ -20,6 +20,34 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
 
+  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    return ListTile(
+      key: ValueKey(document.documentID),
+      title: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFF303030)),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Text(document['name']),
+            ),
+            Text(document['votes'].toString())
+          ],
+        ),
+      ),
+      onTap: () => Firestore.instance.runTransaction((transaction) async {
+        DocumentSnapshot freshSnap =
+        await transaction.get(document.reference);
+        await transaction.update(
+            freshSnap.reference, {'votes': freshSnap['votes'] + 1});
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +59,8 @@ class MyHomePage extends StatelessWidget {
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
                 padding: const EdgeInsets.only(top: 10.0),
-                itemExtent: 25.0,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.documents[index];
-                  return Text(" ${ds['name']} ${ds['votes']}");
-                }
+                itemExtent: 55.0,
+                itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index]),
             );
           }),
     );
