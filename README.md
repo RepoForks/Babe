@@ -3,6 +3,10 @@
 
 A Flutter app that uses Firebase's Cloud Firestore to conduct a baby names poll.
 
+## Screenshots
+
+<img src="./design/screen0.png">
+
 ## Packages Used
 
 * [cloud_firestore](https://pub.dartlang.org/packages/cloud_firestore)
